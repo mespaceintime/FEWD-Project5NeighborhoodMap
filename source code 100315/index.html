@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="css/offline-theme-chrome.css" />
+  <link rel="stylesheet" href="css/offline-language-english.css" />
+  <title>Neighborhood Map - Google Map - Yelp Search</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+  <script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<!-- Offline.js -->
+    <script src="http://github.hubspot.com/offline/offline.min.js"></script>
+    <script>
+        Offline.options = {
+            game: false,
+            checks: {
+                image: {
+                    url: function() {
+                        return 'https://raw.githubusercontent.com/mespaceintime/Project-5-Neighborhood-Map/master/favicon.png?_=' + (Math.floor(Math.random() * 1000000000));
+                    }
+                },
+                active: 'image'
+            }
+        };
+        var run = function() {
+            if (Offline.state === 'up') {
+                Offline.check();
+            }
+        };
+        setInterval(run, 5000);
+    </script>
+</head>
+<body>
+
+  <div id="navigation" class="navi">
+      <!-- <p>Finding your favorite food is easier than ever using Neighborhood Map - Google Map - Yelp Search!</p><br>
+      Instructions 
+      <p>Enter Food into Box 1</p><br>
+      <p>Next Enter "Location" into Box 2</p><br>
+      <p>Click "Search" Button to Navigate Resturaunts</p><br>
+      -->
+      <p>Eat What?</p>
+      <input id="filter" type="text" data-bind="value: currentFilter" placeholder="Pizza, Fish, Hamburger"></br>
+      <p>Eat Where?</p>
+      <input id="location" type="text" data-bind="submit: currentLocation" placeholder="City, State"></br>
+      <button id="nav-btn">Search</button></br>
+  </div>
+        </div></br>
+    <div id="map">
+    <div id="gMap" ></div>
+    </div>
+    <div  id="places" data-bind="visible: placesList().length > 0" class="yelp">
+      <h1>Selection</h1>
+      <hr>
+      <div id="places-list">
+        <ul data-bind="foreach: {data: placesList, as: 'place'}">
+            <li data-bind="click: $parent.listClick">
+              <h2><span data-bind="text: name"></span></h2>
+              <img data-bind="attr: {src: image_url}">
+              <h3><span data-bind="text: address"></span></h3>
+              <img data-bind="attr: {src: rating_img_url}">
+              <hr>
+            </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Google Analytics site ID. -->
+    https://productforums.google.com/forum/#!topic/analytics/yApM6cWl-qE
+    <script>
+        (function(b, o, i, l, e, r) {
+            b.GoogleAnalyticsObject = l;
+            b[l] || (b[l] =
+                function() {
+                    (b[l].q = b[l].q || []).push(arguments);
+                });
+            b[l].l = +new Date;
+            e = o.createElement(i);
+            r = o.getElementsByTagName(i)[0];
+            e.src = 'https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e, r);
+        }(window, document, 'script', 'ga'));
+        ga('create', 'UA-XXXXX-X');
+        ga('send', 'pageview');
+    </script>
+  <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js'></script>
+  <script async src="js/app.js"></script>
+</body>
+
+</html>
