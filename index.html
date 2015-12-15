@@ -1,1 +1,78 @@
-<!DOCTYPE html><html lang=en><head><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><link rel=stylesheet href="css/offline-theme-chrome.css"><link rel=stylesheet href="css/offline-language-english.css"><title>Neighborhood Map - Google Map - Yelp Search</title><link rel=stylesheet href=css/style.css><script src=http://oauth.googlecode.com/svn/code/javascript/oauth.js></script><script src=http://oauth.googlecode.com/svn/code/javascript/sha1.js></script><script type=text/javascript src="http://maps.googleapis.com/maps/api/js?libraries=places"></script><script src=http://github.hubspot.com/offline/offline.min.js></script><script>Offline.options={game:!1,checks:{image:{url:function(){return"https://raw.githubusercontent.com/mespaceintime/FEWD-Project5NeighborhoodMap/master/favicon.png?_="+Math.floor(1e9*Math.random())}},active:"image"}};var run=function(){"up"===Offline.state&&Offline.check()};setInterval(run,5e3);</script><body><div id=navigation class=navi><p>Eat What?</p><input id=filter data-bind="value: currentFilter" placeholder="Pizza, Fish, Hamburger"><p>Eat Where?</p><input id=location data-bind="submit: currentLocation" placeholder="City, State"><button id=nav-btn>Search</button></div><div id=map><div id=gMap></div></div><div id=places data-bind="visible: placesList().length > 0" class=yelp><h1>Selection</h1><hr><div id=places-list><ul data-bind="foreach: {data: placesList, as: 'place'}"><li data-bind="click: $parent.listClick"><h2><span data-bind="text: name"></span></h2><img data-bind="attr: {src: image_url}"><h3><span data-bind="text: address"></span></h3><img data-bind="attr: {src: rating_img_url}"><hr></li></ul></div></div><script async src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js></script><script async src=js/app.js></script>
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/offline-theme-chrome.css" />
+    <link rel="stylesheet" href="css/offline-language-english.css" />
+    <title>Neighborhood Map - Google Map - Yelp Search</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Offline.js -->
+    <script src="http://github.hubspot.com/offline/offline.min.js"></script>
+    <script>
+        Offline.options = {
+            game: false,
+            checks: {
+                image: {
+                    url: function() {
+                        return 'https://raw.githubusercontent.com/mespaceintime/FEWD-Project5NeighborhoodMap/master/favicon.png?_=' + (Math.floor(Math.random() * 1000000000));
+                    }
+                },
+                active: 'image'
+            }
+        };
+        var run = function() {
+            if (Offline.state === 'up') {
+                Offline.check();
+            }
+        };
+        setInterval(run, 5000);
+    </script>
+</head>
+
+<body>
+    <div id="navigation" class="navi">
+        <p>Eat What?</p>
+        <input id="filter" type="text" data-bind="value: currentFilter" placeholder="Pizza, Fish, Hamburger">
+        </br>
+        <p>Eat Where?</p>
+        <input id="location" type="text" data-bind="submit: currentLocation" placeholder="City, State">
+        </br>
+        <button id="nav-btn">Search</button>
+        </br>
+   </div>
+    </br>
+    <div id="map">
+        <!-- <input id="s-input" class="controls" type="search" placeholder="Filter List" data-bind="textInput: query, valueUpdate: 'keyup'"></input> -->
+        <div id="gMap"></div>
+
+    </div>
+    <div id="places" data-bind="visible: placesList().length > 0" class="yelp">
+        <h1>Selection</h1>
+        <h2>Filter Results Below</h2>
+        <input id="s-input" class="controls" type="search" placeholder="Filter List" data-bind="textInput: query, valueUpdate: 'keyup'"></input>
+        <hr>
+        <div id="places-list">
+            <ul data-bind="foreach: search()">
+                <li data-bind="click: $parent.listClick">
+                    <h2><span data-bind="text: name"></span></h2>
+                    <img data-bind="attr: {src: image_url}">
+                    <h3><span data-bind="text: address"></span></h3>
+                    <img data-bind="attr: {src: rating_img_url}">
+                    <hr>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    <script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js'></script>
+    <script async src="js/app.js"></script>
+</body>
+
+</html>
